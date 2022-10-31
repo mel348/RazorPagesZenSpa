@@ -1,0 +1,48 @@
+﻿@model RazorPages.Models.Contact        //pulling in contact model which includes the name, which is why we can pull it at the bottom.
+
+@{
+    ViewData["Title"] = "Service Inquiry Form";
+}
+
+@if (ViewBag.Posted == false)  //if false this is what we what it to do (if it has not posted)
+{
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="InquiryForm">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control">
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <!--add drop down for the service they selected.-->
+                <div class="form-group">
+                    <label asp-for="ServicesID" class="control-label"></label>
+                    <!--needs to be a select not input
+                        to include options add asp-items.
+                        Since you called the ViewData "ServicesID" it will pull the list in HomeController
+                        and therefore display the classification name (options) rather then the id.-->
+                    <select asp-for="ServicesID" asp-items="@ViewBag.ServicesID"class="form-control"></select>              <!--needs to be a select not input-->
+                    <span asp-validation-for="ServicesID" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ContactEmail" class="control-label"></label>
+                    <input asp-for="ContactEmail" class="form-control">
+                    <span asp-validation-for="ContactEmail" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Submit" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+<div>
+        <a asp-action="Index">Back to Home</a>
+    </div>
+}
+else //if not false we want it to display a message
+{
+    <h1>Welcome @Model.Name, Namaste @DateTime.Now.DayOfWeek</h1>
+    <h2>We will be sending you information on our next business day.</h2>
+}

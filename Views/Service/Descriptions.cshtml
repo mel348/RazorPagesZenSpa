@@ -1,0 +1,15 @@
+﻿@model RazorPages.Models.Services   //connecting to the Services Model
+
+<h2>What type of spa service are you interested in?</h2>
+
+<form name="spaServices" method="post">
+    <div class="form-group">
+        <label asp-for="Classification" class="form-label">Select a service from the list</label>
+       <!--to get asp items to generate all option it needs to be in a selectList
+       in view convert it to a select list like we do here
+       take viewbag classification as our list and connecting it to the list in the model and displaying list only for classification-->
+        <select style="width:100px;" asp-for="Classification" asp-items="@(new SelectList(ViewBag.Classifications,"Classification","Classification"))" class="form-control"></select>            
+    </div>
+    <button type="submit">Submit</button>
+</form>
+<!--limit width or it will span over the entire webpage.  Also added the control-form->
