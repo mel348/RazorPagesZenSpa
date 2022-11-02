@@ -10,11 +10,15 @@ namespace RazorPages.Models
     {
         [Key]
         public int ID { get; set; }
+
         [Required]
         public string Name { get; set; }
+
+
         [Required]
         public int ServicesID { get; set; }
         public Services Services { get; set; }
+
         [Required]
         [Display(Name = "Contact email")]
         public string ContactEmail { get; set; }
